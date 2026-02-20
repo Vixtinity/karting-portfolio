@@ -15,16 +15,6 @@
           <div class="stripe"></div>
         </div>
       </div>
-      
-      <div class="info-card info-card--circuit">
-        <span class="info-icon">🏁</span>
-        <span class="info-text">Circuito Favorito<br><strong>Karting Las Américas</strong></span>
-      </div>
-
-      <div class="info-card info-card--kart">
-        <span class="info-icon">⚙️</span>
-        <span class="info-text">Motor<br><strong>Rotax Mini MAX</strong></span>
-      </div>
     </div>
 
     <div class="about-text">
@@ -39,37 +29,6 @@
       <p class="about-desc">
         Entreno tres veces por semana, estudio telemetría con mi padre y trabajo en el gimnasio para mejorar la resistencia. Mi sueño es llegar a la Fórmula 4 antes de los 15 años.
       </p>
-
-      <div class="skills-list">
-        <div class="skill-item">
-          <span class="skill-label">Conducción en lluvia</span>
-          <div class="skill-bar">
-            <div class="skill-fill" style="--pct: 90%"></div>
-          </div>
-          <span class="skill-pct">90%</span>
-        </div>
-        <div class="skill-item">
-          <span class="skill-label">Salidas</span>
-          <div class="skill-bar">
-            <div class="skill-fill" style="--pct: 85%"></div>
-          </div>
-          <span class="skill-pct">85%</span>
-        </div>
-        <div class="skill-item">
-          <span class="skill-label">Gestión de neumáticos</span>
-          <div class="skill-bar">
-            <div class="skill-fill" style="--pct: 78%"></div>
-          </div>
-          <span class="skill-pct">78%</span>
-        </div>
-        <div class="skill-item">
-          <span class="skill-label">Overtaking</span>
-          <div class="skill-bar">
-            <div class="skill-fill" style="--pct: 92%"></div>
-          </div>
-          <span class="skill-pct">92%</span>
-        </div>
-      </div>
     </div>
 
   </div>
@@ -121,14 +80,35 @@
 .helmet-bg {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 50% 50%, rgba(232, 0, 13, 0.1), transparent 70%);
+  background-image: url('/images/imagen9.jpg'); /* Tu imagen */
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.5s ease;
 }
 
-.helmet-icon {
-  font-size: 6rem;
-  z-index: 1;
-  filter: drop-shadow(0 0 20px rgba(232, 0, 13, 0.5));
-  animation: float 4s ease-in-out infinite;
+/* Añade esto para que el texto sea legible sobre la foto */
+.helmet-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom, 
+    rgba(0,0,0,0.2), 
+    rgba(0,0,0,0.7)
+  );
+}
+
+/* Asegura que el contenido flote sobre el fondo */
+.helmet-icon, 
+.helmet-label, 
+.racing-stripes {
+  position: relative; 
+  z-index: 2;
+}
+
+/* Opcional: Efecto de zoom en la foto al pasar el ratón */
+.helmet-card:hover .helmet-bg {
+  transform: scale(1.1);
 }
 
 @keyframes float {

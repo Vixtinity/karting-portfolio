@@ -1,13 +1,13 @@
 ---
 const photos = [
-  { label: "Podio Circuito Guadix 2025", cat: "Carrera", size: "large", src:"/images/imagen1.jpg" },
-  { label: "Pole Position Valencia", cat: "Clasificación", size: "small", src:"/images/imagen2.jpg" },
-  { label: "Pit Lane con el equipo", cat: "Equipo", size: "small", src:"/images/imagen3.jpg" },
-  { label: "Salida desde P1 Almería", cat: "Carrera", size: "medium", src:"/images/imagen4.jpg" },
-  { label: "Campeón Andalucía 2023", cat: "Trofeo", size: "medium", src:"/images/imagen5.jpg" },
-  { label: "Sesión de karting", cat: "Entrenamiento", size: "small", src:"/images/imagen6.jpg" },
-  { label: "Con el kart en boxes", cat: "Mecánica", size: "small", src:"/images/imagen7.jpg" },
-  { label: "Vuelta rápida en Aragón", cat: "Telemetría", size: "large", src:"/images/imagen8.jpg" },
+  { size: "large", src:"/images/imagen1.jpg" },
+  { size: "small", src:"/images/imagen2.jpg" },
+  { size: "small", src:"/images/imagen3.jpg" },
+  { size: "medium", src:"/images/imagen4.jpg" },
+  { size: "medium", src:"/images/imagen5.jpg" },
+  { size: "small", src:"/images/imagen6.jpg" },
+  { size: "small", src:"/images/imagen7.jpg" },
+  { size: "large", src:"/images/imagen8.jpg" },
 ];
 
 const colors = [
@@ -31,26 +31,11 @@ const colors = [
     <div class="photo-grid">
       {photos.map((photo, i) => (
         <div class={`photo-card photo-card--${photo.size}`} style={`--bg: ${colors[i]}`}>
-            <img src={photo.src} alt={photo.label} class="photo-img" />
+            <img src={photo.src} class="photo-img" />
             <span class="photo-add">+</span>
-            
-            {/* El overlay debe ir dentro para que el hover funcione bien */}
-            <div class="photo-overlay">
-              <span class="photo-cat">{photo.cat}</span>
-              <span class="photo-label">{photo.label}</span>
-            </div>
+          
         </div>
       ))}
-    </div>
-
-    <div class="video-section">
-      <div class="video-placeholder">
-        <div class="video-icon">▶</div>
-        <div class="video-text">
-          <h4>Highlights Temporada 2025</h4>
-          <p>Añade tu vídeo de YouTube o Vimeo aquí</p>
-        </div>
-      </div>
     </div>
   </div>
 </section>
