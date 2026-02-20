@@ -1,16 +1,15 @@
 ---
 const photos = [
-  { label: "Podio Circuito Guadix 2025", cat: "Carrera", size: "large" },
-  { label: "Pole Position Valencia", cat: "Clasificación", size: "small" },
-  { label: "Pit Lane con el equipo", cat: "Equipo", size: "small" },
-  { label: "Salida desde P1 Almería", cat: "Carrera", size: "medium" },
-  { label: "Campeón Andalucía 2023", cat: "Trofeo", size: "medium" },
-  { label: "Sesión de karting", cat: "Entrenamiento", size: "small" },
-  { label: "Con el kart en boxes", cat: "Mecánica", size: "small" },
-  { label: "Vuelta rápida en Aragón", cat: "Telemetría", size: "large" },
+  { label: "Podio Circuito Guadix 2025", cat: "Carrera", size: "large", src:"/images/imagen1.jpg" },
+  { label: "Pole Position Valencia", cat: "Clasificación", size: "small", src:"/images/imagen2.jpg" },
+  { label: "Pit Lane con el equipo", cat: "Equipo", size: "small", src:"/images/imagen3.jpg" },
+  { label: "Salida desde P1 Almería", cat: "Carrera", size: "medium", src:"/images/imagen4.jpg" },
+  { label: "Campeón Andalucía 2023", cat: "Trofeo", size: "medium", src:"/images/imagen5.jpg" },
+  { label: "Sesión de karting", cat: "Entrenamiento", size: "small", src:"/images/imagen6.jpg" },
+  { label: "Con el kart en boxes", cat: "Mecánica", size: "small", src:"/images/imagen7.jpg" },
+  { label: "Vuelta rápida en Aragón", cat: "Telemetría", size: "large", src:"/images/imagen8.jpg" },
 ];
 
-const emojis = ["🏎️", "🏁", "🥇", "🎯", "⚡", "🔧", "🏆", "📊"];
 const colors = [
   "rgba(232, 0, 13, 0.15)",
   "rgba(255, 209, 0, 0.1)",
@@ -29,24 +28,21 @@ const colors = [
     <h2 class="section-title">
       La <span class="accent">Galería</span>
     </h2>
-    <p class="gallery-sub">Aquí irán tus fotos y vídeos de carrera. Sube tus mejores momentos para completar este espacio.</p>
-
     <div class="photo-grid">
       {photos.map((photo, i) => (
         <div class={`photo-card photo-card--${photo.size}`} style={`--bg: ${colors[i]}`}>
-          <div class="photo-placeholder">
-            <span class="photo-emoji">{emojis[i]}</span>
+            <img src={photo.src} alt={photo.label} class="photo-img" />
             <span class="photo-add">+</span>
-          </div>
-          <div class="photo-overlay">
-            <span class="photo-cat">{photo.cat}</span>
-            <span class="photo-label">{photo.label}</span>
-          </div>
+            
+            {/* El overlay debe ir dentro para que el hover funcione bien */}
+            <div class="photo-overlay">
+              <span class="photo-cat">{photo.cat}</span>
+              <span class="photo-label">{photo.label}</span>
+            </div>
         </div>
       ))}
     </div>
 
-    <!-- Video section -->
     <div class="video-section">
       <div class="video-placeholder">
         <div class="video-icon">▶</div>
@@ -56,38 +52,17 @@ const colors = [
         </div>
       </div>
     </div>
-
   </div>
 </section>
 
 <style>
-.gallery {
-  padding: 120px 0;
-  background: linear-gradient(to bottom, var(--black), var(--dark), var(--black));
-}
-
-.section-overtitle {
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: var(--red);
-  margin-bottom: 16px;
-}
-
-.gallery-sub {
-  color: var(--gray);
-  font-size: 1rem;
-  margin-top: 16px;
-  margin-bottom: 48px;
-  max-width: 520px;
-}
+/* ... (Mantén tus estilos de .gallery, .section-title, etc. igual) ... */
 
 .photo-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(3, 200px);
-  gap: 4px;
+  gap: 4px; /* Tu gap original */
   margin-bottom: 40px;
 }
 
@@ -97,6 +72,17 @@ const colors = [
   overflow: hidden;
   cursor: pointer;
   transition: transform 0.3s;
+}
+
+/* CLAVE PARA EL AJUSTE DE IMÁGENES */
+.photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ajusta la imagen sin estirarla */
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .photo-card:hover { transform: scale(1.02); z-index: 2; }
@@ -110,27 +96,6 @@ const colors = [
   grid-column: span 2;
 }
 
-.photo-placeholder {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-.photo-emoji {
-  font-size: 2.5rem;
-  opacity: 0.4;
-}
-
-.photo-add {
-  font-size: 1.5rem;
-  color: rgba(255,255,255,0.2);
-  font-weight: 300;
-}
-
 .photo-overlay {
   position: absolute;
   bottom: 0;
@@ -140,87 +105,21 @@ const colors = [
   background: linear-gradient(transparent, rgba(0,0,0,0.8));
   transform: translateY(100%);
   transition: transform 0.3s;
+  z-index: 1;
 }
 
 .photo-card:hover .photo-overlay {
   transform: translateY(0);
 }
 
-.photo-cat {
-  display: block;
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--red);
-  margin-bottom: 4px;
+.photo-emoji {
+  position: absolute; /* Para que quede detrás del overlay pero sobre el fondo */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2.5rem;
+  opacity: 0.4;
 }
 
-.photo-label {
-  display: block;
-  font-weight: 600;
-  font-size: 0.9rem;
-  color: var(--white);
-}
-
-/* Video placeholder */
-.video-section { margin-top: 40px; }
-
-.video-placeholder {
-  background: var(--mid);
-  height: 300px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 24px;
-  border: 2px dashed rgba(255,255,255,0.1);
-  transition: border-color 0.3s;
-  cursor: pointer;
-}
-
-.video-placeholder:hover { border-color: var(--red); }
-
-.video-icon {
-  width: 64px;
-  height: 64px;
-  background: var(--red);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  padding-left: 4px;
-  transition: transform 0.3s;
-}
-
-.video-placeholder:hover .video-icon { transform: scale(1.1); }
-
-.video-text h4 {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 1.5rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-}
-
-.video-text p {
-  color: var(--gray);
-  font-size: 0.9rem;
-  margin-top: 4px;
-}
-
-@media (max-width: 900px) {
-  .photo-grid {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: auto;
-  }
-  .photo-card--large { grid-column: span 2; grid-row: span 1; height: 200px; }
-  .photo-card--medium { grid-column: span 2; height: 180px; }
-}
-
-@media (max-width: 600px) {
-  .photo-grid { grid-template-columns: 1fr 1fr; }
-  .photo-card--large { grid-column: span 2; }
-  .photo-card--medium { grid-column: span 2; }
-}
+/* ... (El resto de tus estilos de media queries e iconos de video) ... */
 </style>
