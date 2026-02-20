@@ -1,0 +1,236 @@
+---
+const trophies = [
+  { icon: "🥇", title: "Campeón Circuito Andaluz", desc: "Categoría Baby MAX · 2023", color: "#FFD100" },
+  { icon: "🏆", title: "3x Pole Position", desc: "Campeonato Regional · 2025", color: "#E8000D" },
+  { icon: "⚡", title: "Vuelta Rápida", desc: "Record Circuito Guadix · 2024", color: "#00BFFF" },
+  { icon: "🥈", title: "Subcampeón Regional", desc: "Mini MAX · 2025", color: "#C0C0C0" },
+  { icon: "🌟", title: "Mejor Piloto Sub-12", desc: "Copa España Junior · 2024", color: "#FFD100" },
+  { icon: "🚀", title: "23 Podios", desc: "En toda su carrera · 2022–2025", color: "#E8000D" },
+];
+
+const timeline = [
+  { year: "2022", event: "Primera carrera oficial", sub: "Trofeo Iniciación, P3 en debut" },
+  { year: "2022", event: "Primer podio", sub: "Circuito Almería, 2ª posición" },
+  { year: "2023", event: "Primera victoria", sub: "Karting Las Américas, categoría Baby MAX" },
+  { year: "2023", event: "Campeón Andaluz", sub: "7 victorias de 8 carreras disputadas" },
+  { year: "2024", event: "Ascenso a Mini MAX", sub: "Nuevo motor, nueva categoría" },
+  { year: "2024", event: "Distinción nacional", sub: "Mejor piloto Sub-12 Copa España" },
+  { year: "2025", event: "8 victorias en temporada activa", sub: "Subcampeón Regional en curso" },
+];
+---
+
+<section id="logros" class="achievements">
+  <div class="container">
+    <p class="section-overtitle">Palmarés</p>
+    <h2 class="section-title">
+      Logros &<br><span class="accent">Reconocimientos</span>
+    </h2>
+
+    <div class="trophies-grid">
+      {trophies.map(t => (
+        <div class="trophy-card" style={`--c: ${t.color}`}>
+          <div class="trophy-icon">{t.icon}</div>
+          <div class="trophy-content">
+            <div class="trophy-title">{t.title}</div>
+            <div class="trophy-desc">{t.desc}</div>
+          </div>
+          <div class="trophy-glow"></div>
+        </div>
+      ))}
+    </div>
+
+    <div class="timeline-wrap">
+      <h3 class="timeline-heading">Línea del tiempo</h3>
+      <div class="timeline">
+        {timeline.map((item, i) => (
+          <div class={`timeline-item ${i % 2 === 0 ? 'left' : 'right'}`}>
+            <div class="timeline-content">
+              <span class="tl-year">{item.year}</span>
+              <h4 class="tl-event">{item.event}</h4>
+              <p class="tl-sub">{item.sub}</p>
+            </div>
+            <div class="timeline-dot"></div>
+          </div>
+        ))}
+        <div class="timeline-line"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+.achievements {
+  padding: 120px 0;
+}
+
+.section-overtitle {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 16px;
+}
+
+.achievements .section-title { margin-bottom: 60px; }
+
+.trophies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2px;
+  margin-bottom: 100px;
+}
+
+.trophy-card {
+  background: var(--mid);
+  padding: 32px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s;
+  cursor: default;
+}
+
+.trophy-card:hover {
+  transform: translateX(6px);
+}
+
+.trophy-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--c);
+}
+
+.trophy-icon {
+  font-size: 2.4rem;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 12px var(--c));
+}
+
+.trophy-title {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+
+.trophy-desc {
+  font-size: 0.8rem;
+  color: var(--gray);
+  letter-spacing: 1px;
+}
+
+.trophy-glow {
+  position: absolute;
+  right: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 80px;
+  height: 80px;
+  background: var(--c);
+  opacity: 0.04;
+  border-radius: 50%;
+  filter: blur(20px);
+}
+
+/* Timeline */
+.timeline-heading {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 48px;
+  text-align: center;
+}
+
+.timeline {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.timeline-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, transparent, var(--red) 20%, var(--red) 80%, transparent);
+  transform: translateX(-50%);
+}
+
+.timeline-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.timeline-item.left {
+  flex-direction: row;
+  padding-right: calc(50% + 32px);
+}
+
+.timeline-item.right {
+  flex-direction: row-reverse;
+  padding-left: calc(50% + 32px);
+}
+
+.timeline-content {
+  background: var(--mid);
+  padding: 20px 24px;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  flex: 1;
+}
+
+.tl-year {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--red);
+  text-transform: uppercase;
+}
+
+.tl-event {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--white);
+  margin: 4px 0;
+}
+
+.tl-sub {
+  font-size: 0.85rem;
+  color: var(--gray);
+}
+
+.timeline-dot {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 12px;
+  background: var(--red);
+  border-radius: 50%;
+  box-shadow: 0 0 12px var(--red);
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .timeline-line { left: 16px; }
+  .timeline-item.left, .timeline-item.right {
+    padding: 0 0 0 48px;
+    flex-direction: row;
+  }
+  .timeline-dot { left: 16px; }
+}
+</style>

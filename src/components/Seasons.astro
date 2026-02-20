@@ -1,0 +1,348 @@
+---
+const seasons = [
+  {
+    year: "2025",
+    category: "Mini MAX",
+    championship: "Campeonato Regional Sur",
+    position: "2°",
+    races: 10,
+    wins: 8,
+    podiums: 9,
+    points: 187,
+    highlight: true,
+    color: "#FFD100"
+  },
+  {
+    year: "2024",
+    category: "Mini MAX",
+    championship: "Copa España Junior",
+    position: "4°",
+    races: 12,
+    wins: 5,
+    podiums: 9,
+    points: 156,
+    highlight: false,
+    color: "#E8000D"
+  },
+  {
+    year: "2023",
+    category: "Baby MAX",
+    championship: "Circuito Andaluz",
+    position: "1°",
+    races: 8,
+    wins: 7,
+    podiums: 8,
+    points: 168,
+    highlight: false,
+    color: "#4CAF50"
+  },
+  {
+    year: "2022",
+    category: "Baby MAX",
+    championship: "Trofeo Iniciación",
+    position: "3°",
+    races: 6,
+    wins: 3,
+    podiums: 5,
+    points: 112,
+    highlight: false,
+    color: "#E8000D"
+  },
+];
+
+const races2025 = [
+  { round: 1, circuit: "Circuito Guadix", date: "Mar 2025", pos: 1, qual: 2, color: "gold" },
+  { round: 2, circuit: "Karting Valencia", date: "Abr 2025", pos: 2, qual: 1, color: "silver" },
+  { round: 3, circuit: "Motorland Aragón", date: "Abr 2025", pos: 1, qual: 1, color: "gold" },
+  { round: 4, circuit: "Circuito Almería", date: "May 2025", pos: 1, qual: 3, color: "gold" },
+  { round: 5, circuit: "Jerez Kart", date: "Jun 2025", pos: 3, qual: 2, color: "bronze" },
+  { round: 6, circuit: "Karting Las Américas", date: "Jul 2025", pos: 1, qual: 1, color: "gold" },
+  { round: 7, circuit: "Circuito Guadix", date: "Ago 2025", pos: 2, qual: 2, color: "silver" },
+  { round: 8, circuit: "Valencia Kart", date: "Sep 2025", pos: 1, qual: 1, color: "gold" },
+  { round: 9, circuit: "Karting Sevilla", date: "Oct 2025", pos: 1, qual: 2, color: "gold" },
+  { round: 10, circuit: "Motorland Aragón", date: "Nov 2025", pos: 1, qual: 1, color: "gold" },
+];
+---
+
+<section id="temporadas" class="seasons">
+  <div class="container">
+    <p class="section-overtitle">Historial competitivo</p>
+    <h2 class="section-title">
+      Mis <span class="accent">Temporadas</span>
+    </h2>
+
+    <!-- Season cards -->
+    <div class="seasons-grid">
+      {seasons.map(s => (
+        <div class={`season-card ${s.highlight ? 'season-card--highlight' : ''}`} style={`--accent: ${s.color}`}>
+          <div class="season-year">{s.year}</div>
+          <div class="season-info">
+            <div class="season-cat">{s.category}</div>
+            <div class="season-champ">{s.championship}</div>
+          </div>
+          <div class="season-pos">{s.position}</div>
+          <div class="season-stats">
+            <div class="mini-stat">
+              <span class="mini-num">{s.wins}</span>
+              <span class="mini-lbl">Wins</span>
+            </div>
+            <div class="mini-stat">
+              <span class="mini-num">{s.podiums}</span>
+              <span class="mini-lbl">Podios</span>
+            </div>
+            <div class="mini-stat">
+              <span class="mini-num">{s.races}</span>
+              <span class="mini-lbl">Carreras</span>
+            </div>
+            <div class="mini-stat">
+              <span class="mini-num">{s.points}</span>
+              <span class="mini-lbl">Puntos</span>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- 2025 detailed results -->
+    <div class="results-table-wrap">
+      <h3 class="results-title">Resultados 2025 — Ronda a ronda</h3>
+      <div class="results-table">
+        <div class="rt-header">
+          <span>Ronda</span>
+          <span>Circuito</span>
+          <span>Fecha</span>
+          <span>Clasif.</span>
+          <span>Carrera</span>
+        </div>
+        {races2025.map(r => (
+          <div class={`rt-row rt-row--${r.color}`}>
+            <span class="rt-round">{String(r.round).padStart(2,'0')}</span>
+            <span class="rt-circuit">{r.circuit}</span>
+            <span class="rt-date">{r.date}</span>
+            <span class="rt-qual">P{r.qual}</span>
+            <span class={`rt-pos rt-pos--${r.color}`}>P{r.pos}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+.seasons {
+  padding: 120px 0;
+  background: linear-gradient(to bottom, var(--black), var(--dark), var(--black));
+}
+
+.section-overtitle {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 16px;
+}
+
+.seasons .section-title { margin-bottom: 60px; }
+
+.seasons-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2px;
+  margin-bottom: 80px;
+}
+
+.season-card {
+  background: var(--mid);
+  padding: 32px;
+  position: relative;
+  border-top: 2px solid rgba(255,255,255,0.04);
+  transition: transform 0.3s, background 0.3s;
+  overflow: hidden;
+}
+
+.season-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.season-card:hover {
+  background: rgba(255,255,255,0.04);
+  transform: translateY(-4px);
+}
+
+.season-card:hover::before {
+  transform: scaleX(1);
+}
+
+.season-card--highlight {
+  background: rgba(255, 209, 0, 0.04);
+  border-top-color: var(--yellow);
+}
+
+.season-card--highlight::after {
+  content: '★ ACTIVA';
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--yellow);
+  background: rgba(255, 209, 0, 0.1);
+  padding: 4px 10px;
+}
+
+.season-year {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 4rem;
+  font-weight: 900;
+  line-height: 1;
+  color: rgba(255,255,255,0.06);
+  position: absolute;
+  top: 16px;
+  right: 20px;
+}
+
+.season-info { margin-bottom: 16px; }
+
+.season-cat {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.season-champ {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--white);
+}
+
+.season-pos {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 5rem;
+  font-weight: 900;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 20px;
+}
+
+.season-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.mini-stat { text-align: center; }
+
+.mini-num {
+  display: block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.mini-lbl {
+  display: block;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+
+/* Results table */
+.results-table-wrap {
+  background: var(--mid);
+  padding: 40px;
+  clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 24px 100%, 0 calc(100% - 24px));
+}
+
+.results-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 24px;
+  color: var(--white);
+}
+
+.results-table {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.rt-header, .rt-row {
+  display: grid;
+  grid-template-columns: 60px 1fr 120px 80px 80px;
+  padding: 12px 16px;
+  align-items: center;
+  gap: 8px;
+}
+
+.rt-header {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gray);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding-bottom: 16px;
+}
+
+.rt-row {
+  background: rgba(255,255,255,0.02);
+  transition: background 0.2s;
+  font-size: 0.9rem;
+}
+
+.rt-row:hover { background: rgba(255,255,255,0.05); }
+
+.rt-row--gold { border-left: 2px solid #FFD100; }
+.rt-row--silver { border-left: 2px solid #C0C0C0; }
+.rt-row--bronze { border-left: 2px solid #CD7F32; }
+
+.rt-round {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--gray);
+}
+
+.rt-circuit { font-weight: 600; color: var(--white); }
+.rt-date { color: var(--gray); font-size: 0.85rem; }
+.rt-qual { color: var(--gray); font-weight: 600; }
+
+.rt-pos {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 900;
+}
+
+.rt-pos--gold { color: #FFD100; }
+.rt-pos--silver { color: #C0C0C0; }
+.rt-pos--bronze { color: #CD7F32; }
+
+@media (max-width: 768px) {
+  .rt-header, .rt-row {
+    grid-template-columns: 40px 1fr 80px 60px;
+  }
+  .rt-row .rt-date { display: none; }
+  .results-table-wrap { padding: 20px; }
+}
+</style>

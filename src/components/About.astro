@@ -1,0 +1,284 @@
+---
+---
+
+<section id="sobre-mi" class="about">
+  <div class="container about-inner">
+    
+    <div class="about-visual">
+      <div class="helmet-card">
+        <div class="helmet-bg"></div>
+        <div class="helmet-icon">🏎️</div>
+        <div class="helmet-label">Piloto #11</div>
+        <div class="racing-stripes">
+          <div class="stripe"></div>
+          <div class="stripe"></div>
+          <div class="stripe"></div>
+        </div>
+      </div>
+      
+      <div class="info-card info-card--circuit">
+        <span class="info-icon">🏁</span>
+        <span class="info-text">Circuito Favorito<br><strong>Karting Las Américas</strong></span>
+      </div>
+
+      <div class="info-card info-card--kart">
+        <span class="info-icon">⚙️</span>
+        <span class="info-text">Motor<br><strong>Rotax Mini MAX</strong></span>
+      </div>
+    </div>
+
+    <div class="about-text">
+      <p class="about-overtitle">Sobre mí</p>
+      <h2 class="section-title">
+        La pista es<br><span class="accent">mi hogar</span>
+      </h2>
+
+      <p class="about-desc">
+        Empecé a los 7 años en un karting de iniciación y desde el primer momento supe que esto era lo mío. Cada fin de semana de carrera es una nueva oportunidad de mejorar mis tiempos, aprender de los mejores y demostrar que la edad no es un límite.
+      </p>
+      <p class="about-desc">
+        Entreno tres veces por semana, estudio telemetría con mi padre y trabajo en el gimnasio para mejorar la resistencia. Mi sueño es llegar a la Fórmula 4 antes de los 15 años.
+      </p>
+
+      <div class="skills-list">
+        <div class="skill-item">
+          <span class="skill-label">Conducción en lluvia</span>
+          <div class="skill-bar">
+            <div class="skill-fill" style="--pct: 90%"></div>
+          </div>
+          <span class="skill-pct">90%</span>
+        </div>
+        <div class="skill-item">
+          <span class="skill-label">Salidas</span>
+          <div class="skill-bar">
+            <div class="skill-fill" style="--pct: 85%"></div>
+          </div>
+          <span class="skill-pct">85%</span>
+        </div>
+        <div class="skill-item">
+          <span class="skill-label">Gestión de neumáticos</span>
+          <div class="skill-bar">
+            <div class="skill-fill" style="--pct: 78%"></div>
+          </div>
+          <span class="skill-pct">78%</span>
+        </div>
+        <div class="skill-item">
+          <span class="skill-label">Overtaking</span>
+          <div class="skill-bar">
+            <div class="skill-fill" style="--pct: 92%"></div>
+          </div>
+          <span class="skill-pct">92%</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+.about {
+  padding: 120px 0;
+  position: relative;
+}
+
+.about::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, transparent, var(--red), transparent);
+}
+
+.about-inner {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 80px;
+  align-items: center;
+}
+
+/* Visual side */
+.about-visual {
+  position: relative;
+  height: 500px;
+}
+
+.helmet-card {
+  position: relative;
+  width: 280px;
+  height: 320px;
+  background: var(--mid);
+  border: 1px solid rgba(232, 0, 13, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+  overflow: hidden;
+}
+
+.helmet-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(232, 0, 13, 0.1), transparent 70%);
+}
+
+.helmet-icon {
+  font-size: 6rem;
+  z-index: 1;
+  filter: drop-shadow(0 0 20px rgba(232, 0, 13, 0.5));
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.helmet-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 900;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--red);
+  z-index: 1;
+  margin-top: 12px;
+}
+
+.racing-stripes {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  gap: 4px;
+  height: 8px;
+}
+
+.stripe:nth-child(1) { flex: 1; background: var(--red); }
+.stripe:nth-child(2) { flex: 2; background: var(--yellow); }
+.stripe:nth-child(3) { flex: 1; background: var(--red); }
+
+.info-card {
+  position: absolute;
+  background: var(--dark);
+  border: 1px solid rgba(255,255,255,0.07);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+}
+
+.info-card--circuit {
+  bottom: 80px;
+  right: 0;
+  animation: fadeUp 0.8s ease 0.8s both;
+}
+
+.info-card--kart {
+  top: 40px;
+  right: 20px;
+  animation: fadeUp 0.8s ease 1s both;
+}
+
+.info-icon { font-size: 1.4rem; }
+
+.info-text {
+  font-size: 0.8rem;
+  color: var(--gray);
+  line-height: 1.4;
+}
+
+.info-text strong {
+  display: block;
+  color: var(--white);
+  font-weight: 700;
+}
+
+/* Text side */
+.about-overtitle {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 16px;
+}
+
+.about-text .section-title {
+  margin-bottom: 24px;
+}
+
+.about-desc {
+  color: var(--gray);
+  line-height: 1.8;
+  margin-bottom: 16px;
+  font-size: 1.05rem;
+}
+
+.skills-list {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.skill-item {
+  display: grid;
+  grid-template-columns: 180px 1fr 40px;
+  align-items: center;
+  gap: 12px;
+}
+
+.skill-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+
+.skill-bar {
+  height: 3px;
+  background: rgba(255,255,255,0.07);
+  position: relative;
+  overflow: hidden;
+}
+
+.skill-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: var(--pct);
+  background: linear-gradient(90deg, var(--red), var(--yellow));
+  transform-origin: left;
+  animation: barFill 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
+}
+
+@keyframes barFill {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+.skill-pct {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--red);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 900px) {
+  .about-inner { grid-template-columns: 1fr; }
+  .about-visual { height: 340px; margin: 0 auto; }
+  .skill-item { grid-template-columns: 140px 1fr 40px; }
+}
+</style>

@@ -1,0 +1,309 @@
+---
+---
+
+<section id="contacto" class="contact">
+  <div class="container contact-inner">
+    
+    <div class="contact-left">
+      <p class="section-overtitle">¿Hablamos?</p>
+      <h2 class="section-title">
+        Contacta<br>con el <span class="accent">equipo</span>
+      </h2>
+      <p class="contact-desc">
+        ¿Quieres ser patrocinador, seguir la temporada de Marco o simplemente saludarnos? Escríbenos y te respondemos en menos de 48 horas.
+      </p>
+
+      <div class="contact-info">
+        <a href="mailto:equipo@marcorodriguez.es" class="contact-link">
+          <span class="contact-link-icon">✉</span>
+          equipo@marcorodriguez.es
+        </a>
+        <a href="https://instagram.com" target="_blank" class="contact-link">
+          <span class="contact-link-icon">📸</span>
+          @marco_racing_11
+        </a>
+        <a href="https://youtube.com" target="_blank" class="contact-link">
+          <span class="contact-link-icon">▶</span>
+          Marco Rodríguez Karting
+        </a>
+      </div>
+
+      <div class="sponsors-area">
+        <p class="sponsors-title">Patrocinadores</p>
+        <p class="sponsors-sub">¿Tu marca aquí? Apoya a un futuro campeón.</p>
+        <a href="mailto:equipo@marcorodriguez.es" class="btn-sponsor">Ser patrocinador</a>
+      </div>
+    </div>
+
+    <div class="contact-right">
+      <form class="contact-form" id="contactForm">
+        <div class="form-group">
+          <label for="name">Nombre</label>
+          <input type="text" id="name" name="name" placeholder="Tu nombre" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="tu@email.com" required />
+        </div>
+        <div class="form-group">
+          <label for="subject">Asunto</label>
+          <select id="subject" name="subject">
+            <option>Patrocinio</option>
+            <option>Prensa / Media</option>
+            <option>Colaboración</option>
+            <option>Otro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">Mensaje</label>
+          <textarea id="message" name="message" rows="5" placeholder="Escribe tu mensaje..." required></textarea>
+        </div>
+        <button type="submit" class="btn-submit">
+          <span>Enviar mensaje</span>
+          <span class="btn-icon">→</span>
+        </button>
+        <p class="form-note" id="formNote"></p>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-left">
+      <span class="footer-logo">#11 Marco Rodríguez</span>
+      <span class="footer-sub">Piloto de Karting · España</span>
+    </div>
+    <p class="footer-copy">© 2025 Marco Rodríguez. Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+<style>
+.contact {
+  padding: 120px 0;
+}
+
+.section-overtitle {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 16px;
+}
+
+.contact-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.contact-left .section-title { margin-bottom: 20px; }
+
+.contact-desc {
+  color: var(--gray);
+  font-size: 1rem;
+  line-height: 1.8;
+  margin-bottom: 32px;
+  max-width: 380px;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--gray);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: color 0.2s;
+}
+
+.contact-link:hover { color: var(--white); }
+
+.contact-link-icon {
+  width: 32px;
+  height: 32px;
+  background: var(--mid);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  clip-path: polygon(4px 0, 100% 0, calc(100% - 4px) 100%, 0 100%);
+  flex-shrink: 0;
+}
+
+.sponsors-area {
+  background: var(--mid);
+  padding: 24px;
+  border-left: 3px solid var(--yellow);
+}
+
+.sponsors-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--yellow);
+  margin-bottom: 6px;
+}
+
+.sponsors-sub {
+  font-size: 0.85rem;
+  color: var(--gray);
+  margin-bottom: 16px;
+}
+
+.btn-sponsor {
+  display: inline-block;
+  background: var(--yellow);
+  color: var(--black);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 10px 24px;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  transition: opacity 0.2s;
+}
+
+.btn-sponsor:hover { opacity: 0.85; }
+
+/* Form */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background: var(--mid);
+  border: 1px solid rgba(255,255,255,0.07);
+  color: var(--white);
+  padding: 14px 16px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+  resize: vertical;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--red);
+}
+
+.form-group select option { background: var(--dark); }
+
+.btn-submit {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--red);
+  color: var(--white);
+  border: none;
+  padding: 16px 28px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+  transition: background 0.2s;
+}
+
+.btn-submit:hover { background: #cc0000; }
+.btn-icon { font-size: 1.2rem; }
+
+.form-note {
+  font-size: 0.85rem;
+  color: var(--yellow);
+  text-align: center;
+  min-height: 20px;
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 32px 0;
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-logo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.footer-sub {
+  font-size: 0.75rem;
+  color: var(--gray);
+  letter-spacing: 2px;
+}
+
+.footer-copy {
+  font-size: 0.8rem;
+  color: var(--gray);
+}
+
+@media (max-width: 900px) {
+  .contact-inner { grid-template-columns: 1fr; }
+}
+</style>
+
+<script>
+  const form = document.getElementById('contactForm') as HTMLFormElement;
+  const note = document.getElementById('formNote');
+  
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (note) {
+      note.textContent = '✓ Mensaje enviado. ¡Te contactaremos pronto!';
+      setTimeout(() => { note.textContent = ''; }, 5000);
+    }
+    form.reset();
+  });
+</script>
