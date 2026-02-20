@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  astro:
+    build: .
+    container_name: karting-portfolio
+    ports:
+      - "80:80"
+    restart: always
