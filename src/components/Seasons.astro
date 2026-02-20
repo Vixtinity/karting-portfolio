@@ -101,35 +101,12 @@ const races2025 = [
       ))}
     </div>
 
-    <!-- 2025 detailed results -->
-    <div class="results-table-wrap">
-      <h3 class="results-title">Resultados 2025 — Ronda a ronda</h3>
-      <div class="results-table">
-        <div class="rt-header">
-          <span>Ronda</span>
-          <span>Circuito</span>
-          <span>Fecha</span>
-          <span>Clasif.</span>
-          <span>Carrera</span>
-        </div>
-        {races2025.map(r => (
-          <div class={`rt-row rt-row--${r.color}`}>
-            <span class="rt-round">{String(r.round).padStart(2,'0')}</span>
-            <span class="rt-circuit">{r.circuit}</span>
-            <span class="rt-date">{r.date}</span>
-            <span class="rt-qual">P{r.qual}</span>
-            <span class={`rt-pos rt-pos--${r.color}`}>P{r.pos}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-
   </div>
 </section>
 
 <style>
 .seasons {
-  padding: 120px 0;
+  padding: 50px 0;
   background: linear-gradient(to bottom, var(--black), var(--dark), var(--black));
 }
 
