@@ -1,7 +1,9 @@
 services:
   karting-portfolio:
-    build: .
-    container_name: hector_karting
+    build:
+      context: .. # Esto le dice que suba un nivel para buscar los archivos
+      dockerfile: docker/Dockerfile # Indica dónde está el Dockerfile
+    container_name: hector-karting
     ports:
-      - "8080:80" # Podrás ver tu web en http://localhost:8080
+      - "7676:80"
     restart: always
