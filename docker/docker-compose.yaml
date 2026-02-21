@@ -1,22 +1,17 @@
+version: "3.8"
+
 services:
-  traefik:
-    image: traefik:latest
-    container_name: traefik
+  app-proxy:
+    image: jc21/nginx-proxy-manager:latest
+    container_name: nginx-proxy-manager
     restart: unless-stopped
-    command:
-      - "--api.insecure=true"                       # Habilita el dashboard (solo para pruebas)
-      - "--providers.docker=true"                   # Detecta contenedores por labels
-      - "--entrypoints.web.address=:80"
-      - "--entrypoints.websecure.address=:443"
     ports:
       - "80:80"
+      - "81:81"
       - "443:443"
-      - "8080:8080"                                # Dashboard de Traefik
     volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock:ro"  # Permite que Traefik vea los contenedores
-      - ./traefik_data:/etc/traefik                 # Persistencia de certificados y configs
-    networks:
-      - web
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencrypt
 
   karting-portfolio:
     build:
@@ -24,20 +19,5 @@ services:
       dockerfile: docker/Dockerfile
     container_name: hector-karting
     restart: always
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.karting.rule=Host(`hectortarazoncastillo.com`)"
-      - "traefik.http.routers.karting.entrypoints=web"
-      - "traefik.http.services.karting.loadbalancer.server.port=80"
-      # Para HTTPS (opcional si quieres Let's Encrypt):
-      # - "traefik.http.routers.karting.entrypoints=websecure"
-      # - "traefik.http.routers.karting.tls=true"
-      # - "traefik.http.routers.karting.tls.certresolver=myresolver"
-    networks:
-      - web
     expose:
       - "80"
-
-networks:
-  web:
-    external: true
