@@ -1,9 +1,23 @@
-  services:
-    karting-portfolio:
-      build:
-        context: .. # Esto le dice que suba un nivel para buscar los archivos
-        dockerfile: docker/Dockerfile # Indica dónde está el Dockerfile
-      container_name: hector-karting
-      ports:
-        - "7676:80"
-      restart: always
+version: "3.8"
+
+services:
+  app-proxy:
+    image: jc21/nginx-proxy-manager:latest
+    container_name: nginx-proxy-manager
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "81:81"
+      - "443:443"
+    volumes:
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencrypt
+
+  karting-portfolio:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: hector-karting
+    restart: always
+    expose:
+      - "80"
