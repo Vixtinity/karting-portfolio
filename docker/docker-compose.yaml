@@ -1,9 +1,9 @@
-services:
-  karting-portfolio:
-    build:
-      context: .. # Esto le dice que suba un nivel para buscar los archivos
-      dockerfile: docker/Dockerfile # Indica dónde está el Dockerfile
-    container_name: hector-karting
-    ports:
-      - "7676:80"
-    restart: always
+  services:
+    karting-portfolio:
+      build:
+        context: .. # Esto le dice que suba un nivel para buscar los archivos
+        dockerfile: docker/Dockerfile # Indica dónde está el Dockerfile
+      container_name: hector-karting
+      ports:
+        - "7676:80"
+      restart: always
