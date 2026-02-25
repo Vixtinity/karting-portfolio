@@ -8,4 +8,4 @@ services:
     container_name: hector-karting
     restart: always
     ports:
-      - "80:80"
+      - "7676:80"
