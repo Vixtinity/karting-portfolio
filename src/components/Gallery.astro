@@ -1,12 +1,12 @@
 ---
 const photos = [
-  { size: "large", src:"/images/imagen1.jpg" },
-  { size: "small", src:"/images/imagen2.jpg" },
-  { size: "small", src:"/images/imagen3.jpg" },
-  { size: "medium", src:"/images/imagen4.jpg" },
-  { size: "medium", src:"/images/imagen5.jpg" },
-  { size: "small", src:"/images/imagen6.jpg" },
-  { size: "small", src:"/images/imagen7.jpg" },
+  { size: "large",  src: "/images/imagen1.jpg" },
+  { size: "small",  src: "/images/imagen2.jpg" },
+  { size: "small",  src: "/images/imagen3.jpg" },
+  { size: "medium", src: "/images/imagen4.jpg" },
+  { size: "medium", src: "/images/imagen5.jpg" },
+  { size: "small",  src: "/images/imagen6.jpg" },
+  { size: "small",  src: "/images/imagen7.jpg" },
 ];
 
 const colors = [
@@ -17,7 +17,6 @@ const colors = [
   "rgba(255, 209, 0, 0.15)",
   "rgba(0, 200, 100, 0.08)",
   "rgba(232, 0, 13, 0.12)",
-  "rgba(255, 209, 0, 0.08)",
 ];
 ---
 
@@ -29,24 +28,36 @@ const colors = [
     </h2>
     <div class="photo-grid">
       {photos.map((photo, i) => (
-        <div class={`photo-card photo-card--${photo.size}`} style={`--bg: ${colors[i]}`}>
-            <img src={photo.src} class="photo-img" />
-            <span class="photo-add">+</span>
-          
+        <div
+          class={`photo-card photo-card--${photo.size}`}
+          style={`--bg: ${colors[i]}`}
+          data-index={i}
+          data-src={photo.src}
+        >
+          <img src={photo.src} class="photo-img" alt={`Foto ${i + 1}`} />
         </div>
       ))}
     </div>
   </div>
 </section>
 
-<style>
-/* ... (Mantén tus estilos de .gallery, .section-title, etc. igual) ... */
+<!-- Lightbox -->
+<div class="lightbox-overlay" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose">✕</button>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="" />
+  <div class="lightbox-nav">
+    <button id="lightboxPrev">← Anterior</button>
+    <button id="lightboxNext">Siguiente →</button>
+  </div>
+  <span class="lightbox-counter" id="lightboxCounter"></span>
+</div>
 
+<style>
 .photo-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(3, 200px);
-  gap: 4px; /* Tu gap original */
+  gap: 4px;
   margin-bottom: 40px;
 }
 
@@ -58,52 +69,135 @@ const colors = [
   transition: transform 0.3s;
 }
 
-/* CLAVE PARA EL AJUSTE DE IMÁGENES */
+.photo-card:hover { transform: scale(1.02); z-index: 2; }
+
 .photo-img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Ajusta la imagen sin estirarla */
+  object-fit: cover;
   display: block;
   position: absolute;
   top: 0;
   left: 0;
 }
 
-.photo-card:hover { transform: scale(1.02); z-index: 2; }
+.photo-card--large  { grid-column: span 2; grid-row: span 2; }
+.photo-card--medium { grid-column: span 2; }
 
-.photo-card--large {
-  grid-column: span 2;
-  grid-row: span 2;
+/* Lightbox */
+.lightbox-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
-.photo-card--medium {
-  grid-column: span 2;
+.lightbox-overlay.open { display: flex; }
+
+.lightbox-img {
+  max-width: 90vw;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 8px;
 }
 
-.photo-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 20px 16px 16px;
-  background: linear-gradient(transparent, rgba(0,0,0,0.8));
-  transform: translateY(100%);
-  transition: transform 0.3s;
-  z-index: 1;
+.lightbox-close {
+  position: fixed;
+  top: 20px;
+  right: 24px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: white;
+  font-size: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.photo-card:hover .photo-overlay {
-  transform: translateY(0);
+.lightbox-nav {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
 }
 
-.photo-emoji {
-  position: absolute; /* Para que quede detrás del overlay pero sobre el fondo */
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 2.5rem;
-  opacity: 0.4;
+.lightbox-nav button {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: white;
+  padding: 8px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s;
 }
 
-/* ... (El resto de tus estilos de media queries e iconos de video) ... */
+.lightbox-nav button:hover { background: rgba(255,255,255,0.2); }
+
+.lightbox-counter {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 13px;
+  margin-top: 8px;
+}
 </style>
+
+<script>
+const photos = [
+  "/images/imagen1.jpg", "/images/imagen2.jpg", "/images/imagen3.jpg",
+  "/images/imagen4.jpg", "/images/imagen5.jpg", "/images/imagen6.jpg",
+  "/images/imagen7.jpg"
+];
+let current = 0;
+
+const overlay  = document.getElementById('lightbox');
+const img      = document.getElementById('lightboxImg');
+const counter  = document.getElementById('lightboxCounter');
+
+function openLightbox(i) {
+  current = i;
+  img.src = photos[current];
+  counter.textContent = `${current + 1} / ${photos.length}`;
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function showPrev() {
+  current = (current - 1 + photos.length) % photos.length;
+  img.src = photos[current];
+  counter.textContent = `${current + 1} / ${photos.length}`;
+}
+
+function showNext() {
+  current = (current + 1) % photos.length;
+  img.src = photos[current];
+  counter.textContent = `${current + 1} / ${photos.length}`;
+}
+
+document.querySelectorAll('.photo-card').forEach(card => {
+  card.addEventListener('click', () => openLightbox(parseInt(card.dataset.index)));
+});
+
+document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+document.getElementById('lightboxPrev').addEventListener('click', showPrev);
+document.getElementById('lightboxNext').addEventListener('click', showNext);
+overlay.addEventListener('click', e => { if (e.target === overlay) closeLightbox(); });
+
+document.addEventListener('keydown', e => {
+  if (!overlay.classList.contains('open')) return;
+  if (e.key === 'Escape')      closeLightbox();
+  if (e.key === 'ArrowLeft')   showPrev();
+  if (e.key === 'ArrowRight')  showNext();
+});
+</script>
