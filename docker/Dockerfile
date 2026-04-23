@@ -1,23 +1,24 @@
 # Etapa 1: Construcción
 FROM node:lts-alpine AS build
 WORKDIR /app
-
-# Copiar archivos de dependencias
 COPY package*.json ./
 RUN npm install
-
-# Copiar el resto del código y construir el sitio
 COPY . .
 RUN npm run build
 
-# Etapa 2: Servidor de Producción
-FROM nginx:stable-alpine AS runtime
+# Etapa 2: Servidor (Usando 'serve')
+FROM node:lts-alpine AS runtime
+WORKDIR /app
 
-# Copiar los archivos estáticos desde la etapa de build
-# Nota: Astro por defecto construye en la carpeta /dist
-COPY --from=build /app/dist /usr/share/nginx/html
+# Instalamos 'serve' para entregar los archivos estáticos
+RUN npm install -g serve
 
-# Exponer el puerto 80
+# Copiamos solo los archivos construidos de la etapa anterior
+COPY --from=build /app/dist ./dist
+
+# Exponemos el puerto 80
 EXPOSE 80
 
-CMD ["nginx", "-g", "daemon off;"]
+# Comando para servir la carpeta dist en el puerto 80
+# -s es para Single Page Application (evita errores 404 al recargar)
+CMD ["serve", "-s", "dist", "-l", "80"]
